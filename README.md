@@ -6,10 +6,10 @@
 
 - 点击 + 打开代码片段管理工具
 
-!https://raw.githubusercontent.com/3egirlsdream/WeakToys/master/img/%E5%8A%A8%E7%94%BB2.gif](https://raw.githubusercontent.com/3egirlsdream/WeakToys/master/img/%E5%8A%A8%E7%94%BB2.gif)
+![https://raw.githubusercontent.com/3egirlsdream/WeakToys/master/img/动画2.gif?raw=true](https://github.com/3egirlsdream/WeakToys/blob/master/img/%E5%8A%A8%E7%94%BB2.gif?raw=true)
 
 
 - 设置中支持云同步，根据机器硬件生成唯一识别码
 
-![https://raw.githubusercontent.com/3egirlsdream/WeakToys/master/img/%E5%8A%A8%E7%94%BB3.gif](https://raw.githubusercontent.com/3egirlsdream/WeakToys/master/img/%E5%8A%A8%E7%94%BB3.gif)
+![https://github.com/3egirlsdream/WeakToys/blob/master/img/%E5%8A%A8%E7%94%BB3.gif?raw=true](https://github.com/3egirlsdream/WeakToys/blob/master/img/%E5%8A%A8%E7%94%BB3.gif?raw=true)
 
