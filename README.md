@@ -1,6 +1,15 @@
-# Clipboard
-- 轻量级的剪贴板 基于 .netcore 3.1
-- 使用alt + v 呼出剪贴板
-- 点击需要复制的项，再使用ctrl v 粘贴  
+# WeakToys
+- 快速代码片记录工具 基于 .netcore 3.1
+- ctrl + space 呼出搜索界面
+  
+![http://cdn.thankful.top/use.gif](http://cdn.thankful.top/use.gif)
+
+- 点击 + 打开代码片段管理工具
 
 ![http://cdn.thankful.top/use.gif](http://cdn.thankful.top/use.gif)
+
+
+- 设置中支持云同步，根据机器硬件生成唯一识别码
+
+![http://cdn.thankful.top/use.gif](http://cdn.thankful.top/use.gif)
+
