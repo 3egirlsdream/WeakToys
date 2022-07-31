@@ -49,7 +49,7 @@ namespace Clipboards
             }
         }
 
-        public static string Http { get; set; } = "https://localhost:44389";
+        public static string Http { get; set; } = "http://thankful.top:4396";
 
 
 
