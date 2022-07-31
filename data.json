@@ -1,0 +1,42 @@
+[
+  {
+    "Desc": "Hyper-V 下 Ubuntu/Deepin 如何设置分辨率",
+    "Code": "//在终端中运行\r\nsudo vi /etc/default/grub\r\n\r\n//找到如下代码\r\nGRUB_CMDLINE_LINUX_DEFAULT=\u0022quiet splash \u0022\r\n\r\n//在末尾指定分辨率，以1920x1080为例\r\nGRUB_CMDLINE_LINUX_DEFAULT=\u0022quiet splash video=hyperv_fb:1920x1080\u0022\r\n\r\n//保存文件\r\n//Deepin需要执行此命令，Ubuntu可以直接跳到下一步\r\nsudo /usr/lib/deepin-api/adjust-grub-theme  \r\n\r\n//更新Grub\r\nsudo update-grub\r\n\r\n//重启系统\r\nreboot"
+  },
+  {
+    "Desc": "以root打开终端",
+    "Code": "sudo nautilus"
+  },
+  {
+    "Desc": "docker 开机启动",
+    "Code": "systemctl enable docker"
+  },
+  {
+    "Desc": "linux启动docker服务",
+    "Code": "sudo systemctl start docker"
+  },
+  {
+    "Desc": "Got permission denied while trying to connect to the Docker daemon socket",
+    "Code": "使用sudo获取管理员权限，运行docker命令"
+  },
+  {
+    "Desc": "Docker Hello World",
+    "Code": "docker run ubuntu:15.10 /bin/echo \u0022Hello world\u0022"
+  },
+  {
+    "Desc": "ubuntu20.04换源",
+    "Code": "lsb_release -a\r\nsudo vim /etc/apt/sources.list\r\nsudo apt install vim\r\n\r\ndeb https://mirrors.ustc.edu.cn/ubuntu/ jammy main restricted universe multiverse\r\ndeb-src https://mirrors.ustc.edu.cn/ubuntu/ jammy main restricted universe multiverse\r\ndeb https://mirrors.ustc.edu.cn/ubuntu/ jammy-updates main restricted universe multiverse\r\ndeb-src https://mirrors.ustc.edu.cn/ubuntu/ jammy-updates main restricted universe multiverse\r\ndeb https://mirrors.ustc.edu.cn/ubuntu/ jammy-backports main restricted universe multiverse\r\ndeb-src https://mirrors.ustc.edu.cn/ubuntu/ jammy-backports main restricted universe multiverse\r\ndeb https://mirrors.ustc.edu.cn/ubuntu/ jammy-security main restricted universe multiverse\r\ndeb-src https://mirrors.ustc.edu.cn/ubuntu/ jammy-security main restricted universe multiverse\r\ndeb https://mirrors.ustc.edu.cn/ubuntu/ jammy-proposed main restricted universe multiverse\r\ndeb-src https://mirrors.ustc.edu.cn/ubuntu/ jammy-proposed main restricted universe multiverse\r\n\r\nsudo apt-get update\r\nsudo apt-get upgrade"
+  },
+  {
+    "Desc": "ssh",
+    "Code": "sudo apt-get install openssh-server\r\n\r\nsudo /etc/init.d/ssh start"
+  },
+  {
+    "Desc": "使用 apt 安装 Visual Studio Code",
+    "Code": "01.以 sudo 用户身份运行下面的命令，更新软件包索引，并且安装依赖软件：\r\n\r\nsudo apt update\r\nsudo apt install software-properties-common apt-transport-https wget\r\n02.使用 wget 命令插入 Microsoft GPG key ：\r\n\r\nwget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -\r\n启用 Visual Studio Code 源仓库，输入：\r\n\r\nsudo add-apt-repository \u0022deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main\u0022\r\n03.一旦 apt 软件源被启用，安装 Visual Studio Code 软件包：\r\n\r\nsudo apt install code\r\n\r\n当一个新版本被发布时，你可以通过你的桌面标准软件工具，或者在你的终端运行命令，来升级Visual Studio Code 软件包：\r\n\r\nsudo apt update\r\nsudo apt upgrade"
+  },
+  {
+    "Desc": "apt-get安装Git",
+    "Code": "sudo apt-get install git"
+  }
+]

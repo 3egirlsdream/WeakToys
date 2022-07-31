@@ -1,0 +1,109 @@
+﻿<Window x:Class="Clipboards.ManageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:Clipboards"
+        mc:Ignorable="d"
+        Title="ManageWindow" Height="450" Width="800"
+        AllowsTransparency="True"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="None">
+    <Window.Background>
+        <SolidColorBrush Opacity="0.5" Color="Transparent"/>
+    </Window.Background>
+    <Border>
+        <Border.Background>
+            <SolidColorBrush Color="#FFF" Opacity="1"/>
+        </Border.Background>
+        <Border.Effect>
+            <DropShadowEffect Color="#000000" ShadowDepth="1" BlurRadius="10" Opacity="0.2" />
+        </Border.Effect>
+        <materialDesign:Card>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Border CornerRadius="5" BorderThickness="0" Margin="10" Grid.Row="0">
+                    <Border.Background>
+                        <SolidColorBrush Color="#FFF" Opacity="1"/>
+                    </Border.Background>
+                    <Border.Effect>
+                        <DropShadowEffect Color="#000000" ShadowDepth="1" BlurRadius="10" Opacity="0.2" />
+                    </Border.Effect>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0" HorizontalAlignment="Stretch" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding Cur.Desc}" VerticalAlignment="Center" BorderThickness="0" FontSize="16" FontFamily="Cascadia Code" Cursor="Arrow"/>
+                        <Button Grid.Column="1" Margin="10 0"
+        Content="{materialDesign:PackIcon Kind=Plus}"
+        Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}" Click="AddButton_Click" ToolTip="新增"/>
+                    </Grid>
+                </Border>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border CornerRadius="5" BorderThickness="0" Margin="10" Grid.Column="0">
+                        <Border.Background>
+                            <SolidColorBrush Color="#FFF" Opacity="1"/>
+                        </Border.Background>
+                        <Border.Effect>
+                            <DropShadowEffect Color="#000000" ShadowDepth="1" BlurRadius="10" Opacity="0.2" />
+                        </Border.Effect>
+                        <ListBox ItemsSource="{Binding ItemsSource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="2*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Desc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14" Foreground="black" />
+                                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Code, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" Height="14"/>
+                                        <Button Grid.Column="1" Grid.RowSpan="2" Style="{StaticResource MaterialDesignIconButton}" Content="{materialDesign:PackIcon Delete}" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" Click="DeleteClick" Tag="{Binding ID}" ToolTip="删除"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Border>
+                    <Border CornerRadius="5" BorderThickness="0" Margin="10" Grid.Column="2">
+                        <Border.Background>
+                            <SolidColorBrush Color="#FFF" Opacity="1"/>
+                        </Border.Background>
+                        <Border.Effect>
+                            <DropShadowEffect Color="#000000" ShadowDepth="1" BlurRadius="10" Opacity="0.2" />
+                        </Border.Effect>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+                            <TextBox Grid.Row="0" Text="{Binding Cur.Code, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" AcceptsReturn="True" Cursor="Arrow" Margin="5" FontFamily="Cascadia Code">
+                            </TextBox>
+                            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="1">
+                                <Button Style="{StaticResource MaterialDesignFlatDarkBgButton}" Margin="5" Width="80" Click="SaveClick" ToolTip="保存">
+                                    <materialDesign:PackIcon Kind="ContentSaveCheckOutline" />
+                                </Button>
+                                <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Margin="5" Width="80" Click="TabItem_GotFocus" ToolTip="退出">
+                                    <materialDesign:PackIcon Kind="ExitToApp" />
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Grid>
+        </materialDesign:Card>
+    </Border>
+</Window>
