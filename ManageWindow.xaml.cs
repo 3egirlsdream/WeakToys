@@ -17,6 +17,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MaterialDesignThemes.Wpf;
 
 namespace WeakToys
 {
@@ -29,8 +30,11 @@ namespace WeakToys
         public ManageWindow()
         {
             InitializeComponent();
-            vm = new ManageVM();
-            DataContext = vm;
+            Loaded += (sender, e) =>
+            {
+                vm = new ManageVM(this);
+                DataContext = vm;
+            };
         }
 
         private void TabItem_GotFocus(object sender, RoutedEventArgs e)
@@ -45,6 +49,8 @@ namespace WeakToys
                 vm.ItemsSource.Add(vm.Cur);
             }
             vm.Cur = new Container("", "");
+            vm.TagText = string.Empty;
+            vm.RefreshChipList(vm.Cur.Tags);
         }
 
         private void SaveClick(object sender, RoutedEventArgs e)
@@ -60,7 +66,8 @@ namespace WeakToys
                 var str = System.Text.Json.JsonSerializer.Serialize(vm.ItemsSource.Select(c=> new
                 {
                     Desc = c.Desc,
-                    Code = c.Code
+                    Code = c.Code,
+                    Tag = c.Tag
                 }).ToList(), options);
                 //开始写入
                 sw.Write(str);
@@ -93,8 +100,10 @@ namespace WeakToys
 
     public class ManageVM : NotifyIconViewModel
     {
-        public ManageVM()
+        ManageWindow window;
+        public ManageVM(Window _window)
         {
+            window = _window as ManageWindow;
             ItemsSource = Global.GetTextInfo();
             Cur = new Container("", "");
         }
@@ -122,6 +131,17 @@ namespace WeakToys
             }
         }
 
+        private string tagText;
+        public string TagText
+        {
+            get => tagText;
+            set
+            {
+                tagText = value;
+                NotifyPropertyChanged(nameof(TagText));
+            }
+        }
+
         private Container selectedItem;
         public Container SelectedItem
         {
@@ -131,6 +151,45 @@ namespace WeakToys
                 selectedItem = value;
                 NotifyPropertyChanged(nameof(SelectedItem));
                 Cur = value;
+                RefreshChipList(Cur.Tags);
+            }
+        }
+
+
+
+        public SimpleCommand CmdAddTag => new SimpleCommand()
+        {
+            ExecuteDelegate=x =>
+            {
+                Cur.Tag += ";" + TagText;
+                RefreshChipList(Cur.Tags);
+                TagText = string.Empty;
+            },
+            CanExecuteDelegate=o => true
+        };
+
+
+        public void RefreshChipList(ObservableCollection<string> strings)
+        {
+            window.chips.Children.Clear();
+            foreach (var item in strings)
+            {
+                var chip = new Chip()
+                {
+                    Content = item,
+                    IsDeletable = true,
+                    DeleteCommand = new SimpleCommand()
+                    {
+                        ExecuteDelegate=z =>
+                        {
+                            var list = strings.Where(c => c != item);
+                            Cur.Tag = string.Join(";", list);
+                            RefreshChipList(Cur.Tags);
+                        },
+                        CanExecuteDelegate=zz => true
+                    }
+                };
+                window.chips.Children.Add(chip);
             }
         }
 

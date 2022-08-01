@@ -45,7 +45,7 @@ namespace WeakToys
         private void Button_Click(object sender, RoutedEventArgs e)
         { 
             var win = new ManageWindow();
-            win.Owner = this;
+            //win.Owner = this;
             win.ShowDialog();
             Global.Containers = Global.GetTextInfo();
         }
@@ -172,6 +172,38 @@ namespace WeakToys
             {
                 desc = value;
                 NotifyPropertyChanged(nameof(Desc));
+            }
+        }
+
+        private string tag;
+        public string Tag
+        {
+            get => tag;
+            set
+            {
+                tag = value;
+                NotifyPropertyChanged(nameof(Tag));
+                if (!string.IsNullOrEmpty(value))
+                {
+                    Tags = new ObservableCollection<string>(value.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries));
+                }
+                else
+                {
+                    Tags = new ObservableCollection<string>();
+                }
+            }
+        }
+
+        private ObservableCollection<string> tags = new ObservableCollection<string>();
+
+        [JsonIgnore]
+        public ObservableCollection<string> Tags
+        {
+            get => tags;
+            set
+            {
+                tags = value;
+                NotifyPropertyChanged(nameof(Tags));
             }
         }
 

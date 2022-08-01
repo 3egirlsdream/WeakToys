@@ -63,8 +63,16 @@
                                         <RowDefinition Height="2"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-
-                                    <TextBlock Text="{Binding Code, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0" FontSize="15" Foreground="Black" TextWrapping="WrapWithOverflow" Height="20" FontFamily="Cascadia Code"/>
+                                    <Grid Grid.Row="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Code, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0" FontSize="16" Foreground="Black" TextWrapping="WrapWithOverflow" Height="20" FontFamily="Cascadia Code"/>
+                                        <ListBox ItemsSource="{Binding Tags}" Grid.Column="1" VerticalAlignment="Center" VerticalContentAlignment="Center" Margin="0 -15 0 -4" Style="{StaticResource MaterialDesignChoiceChipPrimaryListBox}">
+                                        </ListBox>
+                                    </Grid>
+                                       
                                     <Border Grid.Row="1" Height="1" Margin="10 0" Background="LightGray"/>
                                     <TextBlock Text="{Binding Desc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 5 10 0" Grid.Row="2" FontSize="13" FontFamily="Cascadia Code"/>
                                 </Grid>
