@@ -1,4 +1,4 @@
-﻿using Clipboards.Class;
+﻿using WeakToys.Class;
 using NLog.Fluent;
 using System;
 using System.Collections.Generic;
@@ -20,7 +20,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Clipboards
+namespace WeakToys
 {
     
     /// <summary>

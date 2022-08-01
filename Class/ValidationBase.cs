@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
-namespace Clipboards.Class
+namespace WeakToys.Class
 {
     public class ValidationBase : IDataErrorInfo, INotifyPropertyChanged
     {

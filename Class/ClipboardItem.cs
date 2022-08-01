@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Clipboards.Class
+namespace WeakToys.Class
 {
     public class ClipboardItem
     {

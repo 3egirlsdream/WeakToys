@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Clipboards
+namespace WeakToys
 {
     /// <summary>
     /// Interaction logic for App.xaml

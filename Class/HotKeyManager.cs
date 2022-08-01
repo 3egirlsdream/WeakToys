@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Input;
 
-namespace Clipboards.Class
+namespace WeakToys.Class
 {
     public class HotKeyManager
     {

@@ -1,4 +1,4 @@
-﻿using Clipboards.Class;
+﻿using WeakToys.Class;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,7 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Clipboards
+namespace WeakToys
 {
     /// <summary>
     /// ManageWindow.xaml 的交互逻辑

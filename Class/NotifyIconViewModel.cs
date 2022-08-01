@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 
-namespace Clipboards.Class
+namespace WeakToys.Class
 {
     public class NotifyIconViewModel : ValidationBase
     {

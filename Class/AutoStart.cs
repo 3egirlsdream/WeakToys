@@ -7,7 +7,7 @@ using IWshRuntimeLibrary;
 using System.Diagnostics;
 using Microsoft.Win32;
 
-namespace Clipboards.Class
+namespace WeakToys.Class
 {
     internal class AutoStart
     {

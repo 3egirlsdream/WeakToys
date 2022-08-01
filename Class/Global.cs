@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Management;
 using System.Security.Cryptography;
 
-namespace Clipboards
+namespace WeakToys
 {
     internal class Global
     {

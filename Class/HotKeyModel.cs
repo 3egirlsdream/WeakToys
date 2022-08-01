@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Clipboards.Class
+namespace WeakToys.Class
 {
     /// 
     /// 快捷键模型

@@ -1,4 +1,4 @@
-﻿using Clipboards.Class;
+﻿using WeakToys.Class;
 using NHotkey;
 using NHotkey.Wpf;
 using System;
@@ -17,7 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Clipboards
+namespace WeakToys
 {
     /// <summary>
     /// SearchWindow.xaml 的交互逻辑
