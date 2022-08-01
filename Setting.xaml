@@ -13,142 +13,141 @@
     <Window.Background>
         <SolidColorBrush Opacity="0.5" Color="Transparent"/>
     </Window.Background>
-    <Grid  Margin="10">
-        <materialDesign:Snackbar x:Name="snackbar" MessageQueue="{materialDesign:MessageQueue}" Panel.ZIndex="9"></materialDesign:Snackbar>
-    
-    <Border CornerRadius="5" BorderThickness="0" Grid.Row="0">
+    <Border CornerRadius="5" BorderThickness="0" Grid.Row="0" Margin="10">
         <Border.Background>
             <SolidColorBrush Color="#FFF" Opacity="1"/>
         </Border.Background>
         <Border.Effect>
-            <DropShadowEffect Color="#000000" ShadowDepth="1" BlurRadius="10" Opacity="0.2" />
+            <DropShadowEffect Color="#000000" ShadowDepth="1" BlurRadius="10" Opacity="0.4" />
         </Border.Effect>
-        <Border.Clip>
-            <RectangleGeometry RadiusX="5" RadiusY="5"  
+        <Border>
+            <Border.Clip>
+                <RectangleGeometry RadiusX="5" RadiusY="5"  
                                        Rect="0,0,680,430" />
-        </Border.Clip>
-        <materialDesign:Card>
+            </Border.Clip>
+            <Grid MouseLeftButtonDown="MoveWindow">
+            <materialDesign:Snackbar x:Name="snackbar" MessageQueue="{materialDesign:MessageQueue}" Panel.ZIndex="9"></materialDesign:Snackbar>
             <TabControl
     VerticalContentAlignment="Top"
     materialDesign:ColorZoneAssist.Mode="PrimaryMid"
     Style="{StaticResource MaterialDesignNavigationRailTabControl}">
-                    <TabItem>
-                        <TabItem.Header>
-                            <StackPanel Width="auto" Height="auto">
-                                <materialDesign:PackIcon
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Width="auto" Height="auto">
+                            <materialDesign:PackIcon
                                 Width="24"
                                 Height="24"
                                 HorizontalAlignment="Center"
                                 Kind="CloudUpload" />
-                                <TextBlock HorizontalAlignment="Center" Text="云同步" />
+                            <TextBlock HorizontalAlignment="Center" Text="云同步" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="90"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="100"/>
+                        </Grid.RowDefinitions>
+                        <materialDesign:Card Margin="20 20">
+                            <StackPanel Orientation="Horizontal" Margin="10 0">
+                                <TextBox Width="300" VerticalAlignment="Center" Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <Button VerticalAlignment="Center" Style="{StaticResource MaterialDesignIconButton}" Click="refreshKey" ToolTip="重置机器唯一识别码（会根据机器硬件自动生成，同一机器唯一）">
+                                    <materialDesign:PackIcon Kind="Restore" />
+                                </Button>
+                                <Button VerticalAlignment="Center" Style="{StaticResource MaterialDesignIconButton}" Click="Sync" ToolTip="下载云列表">
+                                    <materialDesign:PackIcon Kind="CloudSync" />
+                                </Button>
                             </StackPanel>
-                        </TabItem.Header>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="90"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="100"/>
-                            </Grid.RowDefinitions>
-                            <materialDesign:Card Margin="20 20">
-                                <StackPanel Orientation="Horizontal" Margin="10 0">
-                                    <TextBox Width="300" VerticalAlignment="Center" Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                    <Button VerticalAlignment="Center" Style="{StaticResource MaterialDesignIconButton}" Click="refreshKey" ToolTip="重置机器唯一识别码（会根据机器硬件自动生成，同一机器唯一）">
-                                        <materialDesign:PackIcon Kind="Restore" />
-                                    </Button>
-                                    <Button VerticalAlignment="Center" Style="{StaticResource MaterialDesignIconButton}" Click="Sync" ToolTip="下载云列表">
-                                        <materialDesign:PackIcon Kind="CloudSync" />
-                                    </Button>
-                                </StackPanel>
-                            </materialDesign:Card>
-                            <materialDesign:Card Margin="20" Grid.Row="1">
-                                <ListBox ItemsSource="{Binding ItemsSource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="auto"/>
-                                                </Grid.ColumnDefinitions>
-                                                <TextBlock Grid.Column="0" Text="{Binding Date, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14" VerticalAlignment="Center" Foreground="black" />
-                                                <Button Grid.Column="1" Style="{StaticResource MaterialDesignFloatingActionButton}" Content="{materialDesign:PackIcon Download}" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" Click="DeleteClick" Tag="{Binding ID}" ToolTip="下载" 
+                        </materialDesign:Card>
+                        <materialDesign:Card Margin="20" Grid.Row="1">
+                            <ListBox ItemsSource="{Binding ItemsSource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0" Text="{Binding Date, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14" VerticalAlignment="Center" Foreground="black" />
+                                            <Button Grid.Column="1" Style="{StaticResource MaterialDesignFloatingActionButton}" Content="{materialDesign:PackIcon Download}" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" Click="DeleteClick" Tag="{Binding ID}" ToolTip="下载" 
                                                     materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding Loading, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                     materialDesign:ButtonProgressAssist.Value="-1"
                                                     materialDesign:ButtonProgressAssist.IsIndeterminate="True"/>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                            </materialDesign:Card>
-                            
-                            <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-                                <Button Width="100" Height="30" Margin="20 0" Click="UploadCloud" ToolTip="上传到云">
-                                    <materialDesign:PackIcon Kind="Upload" />
-                                </Button>
-                            </StackPanel>
-                        </Grid>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </materialDesign:Card>
 
-                    </TabItem>
-                    <TabItem>
-                        <TabItem.Header>
-                            <StackPanel
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                            <Button Width="100" Height="30" Margin="20 0" Click="UploadCloud" ToolTip="上传到云">
+                                <materialDesign:PackIcon Kind="Upload" />
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel
           Width="auto"
           Height="auto">
-                                <materialDesign:PackIcon
+                            <materialDesign:PackIcon
             Width="24"
             Height="24"
             HorizontalAlignment="Center"
             Kind="MicrosoftWindows" />
-                                <TextBlock
+                            <TextBlock
             HorizontalAlignment="Center"
             Text="开机启动" />
-                            </StackPanel>
-                        </TabItem.Header>
-                        <materialDesign:Card Margin="20">
-                            <TextBlock FontSize="14" FontFamily="微软雅黑" Margin="10">
+                        </StackPanel>
+                    </TabItem.Header>
+                    <materialDesign:Card Margin="20">
+                        <TextBlock FontSize="14" FontFamily="微软雅黑" Margin="10">
                             <Run Text="1.复制软件的快捷方式"/>
                             <LineBreak />
                             <Run Text="2.win+r 打开 运行 ，输入 shell:startup 回车"/>
                             <LineBreak />
                             <Run Text="3.粘贴快捷方式"/>
-                            </TextBlock>
-                        </materialDesign:Card>
-                       
-                    </TabItem>
-                    <TabItem>
-                        <TabItem.Header>
-                            <StackPanel
+                        </TextBlock>
+                    </materialDesign:Card>
+
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel
           Width="auto"
           Height="auto">
-                                <materialDesign:PackIcon
+                            <materialDesign:PackIcon
             Width="24"
             Height="24"
             HorizontalAlignment="Center"
             Kind="About" />
-                                <TextBlock
+                            <TextBlock
             HorizontalAlignment="Center"
             Text="关于" />
-                            </StackPanel>
-                        </TabItem.Header>
-                        <materialDesign:Card Margin="20">
-                            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                <materialDesign:PackIcon Kind="ToothbrushPaste" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="100" Margin="10"/>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <materialDesign:Card Margin="20">
+                        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <materialDesign:PackIcon Kind="ToothbrushPaste" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="100" Margin="10"/>
 
-                                <TextBlock FontSize="14" FontFamily="微软雅黑" Margin="10 20 0 0">
+                            <TextBlock FontSize="14" FontFamily="微软雅黑" Margin="10 20 0 0">
                                      <Run Text="⚪ 软件所有权归3egirlsdream@github所有"/>
                                      <LineBreak />
                                      <Run Text="⚪ 最新版软件请自行到"/>
                                      <Run Text="https://github.com/3egirlsdream/WeakToys" TextDecorations="Underline"/>
                                      <Run Text="下载"/>
-                                </TextBlock>
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch">
-                                    <TextBlock Text="📧 " Margin="10 0 0 0" FontSize="14" FontFamily="微软雅黑"/>
-                                    <TextBlock Text="xulezuo@hotmail.com" TextDecorations="Underline"  FontSize="14" FontFamily="微软雅黑"/>
-                                </StackPanel>
+                            </TextBlock>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch">
+                                <TextBlock Text="📧 " Margin="10 0 0 0" FontSize="14" FontFamily="微软雅黑"/>
+                                <TextBlock Text="xulezuo@hotmail.com" TextDecorations="Underline"  FontSize="14" FontFamily="微软雅黑"/>
                             </StackPanel>
-                        </materialDesign:Card>
+                        </StackPanel>
+                    </materialDesign:Card>
 
-                    </TabItem>
-                    <TabItem GotFocus="Exit">
+                </TabItem>
+                <TabItem GotFocus="Exit">
                     <TabItem.Header>
                         <StackPanel
           Width="auto"
@@ -165,7 +164,7 @@
                     </TabItem.Header>
                 </TabItem>
             </TabControl>
-        </materialDesign:Card>
+        </Grid>
+        </Border>
     </Border>
-    </Grid>
 </Window>

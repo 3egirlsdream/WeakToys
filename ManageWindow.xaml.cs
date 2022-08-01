@@ -79,6 +79,15 @@ namespace Clipboards
                 vm.ItemsSource.Remove(item);
             }
         }
+
+        private void MoveWindow(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                WindowState = WindowState.Normal;
+                DragMove();
+            }
+        }
     }
 
 

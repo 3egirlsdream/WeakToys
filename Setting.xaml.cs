@@ -26,8 +26,11 @@ namespace Clipboards
         public Setting()
         {
             InitializeComponent();
-            vm = new SettingVM(this);
-            DataContext = vm;
+            Loaded += (sender, e) =>
+            {
+                vm = new SettingVM(this);
+                DataContext = vm;
+            };
         }
 
         private void MoveWindow(object sender, MouseButtonEventArgs e)
@@ -118,10 +121,10 @@ namespace Clipboards
             }
         }
 
-        public void InitCloud()
+        public async void InitCloud()
         {
             var url = Global.Http + "/api/CloudSync/GetAll?user=" + Text;
-            var rst = Connections.HttpGet<List<CloudSync>>(url);
+            var rst = await Connections.HttpGetAsync<List<CloudSync>>(url, Encoding.Default);
             if (rst.success)
             {
                 ItemsSource = new ObservableCollection<CloudSync>(rst.data);
