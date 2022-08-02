@@ -51,10 +51,13 @@
                         <materialDesign:Card Margin="20 20">
                             <StackPanel Orientation="Horizontal" Margin="10 0">
                                 <TextBox Width="300" VerticalAlignment="Center" Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                <Button VerticalAlignment="Center" Style="{StaticResource MaterialDesignIconButton}" Click="refreshKey" ToolTip="重置机器唯一识别码（会根据机器硬件自动生成，同一机器唯一）">
+                                    <Button VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" Click="refreshKey" ToolTip="重置机器唯一识别码（会根据机器硬件自动生成，同一机器唯一）" Margin="10 0">
                                     <materialDesign:PackIcon Kind="Restore" />
                                 </Button>
-                                <Button VerticalAlignment="Center" Style="{StaticResource MaterialDesignIconButton}" Click="Sync" ToolTip="下载云列表">
+                                    <Button VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" Click="Sync" ToolTip="下载云列表"
+                                        materialDesign:ButtonProgressAssist.Value="-1"
+                                        materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding Loading, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        materialDesign:ButtonProgressAssist.IsIndeterminate="True">
                                     <materialDesign:PackIcon Kind="CloudSync" />
                                 </Button>
                             </StackPanel>
@@ -80,7 +83,7 @@
                         </materialDesign:Card>
 
                         <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-                            <Button Width="100" Height="30" Margin="20 0" Click="UploadCloud" ToolTip="上传到云">
+                                <Button Width="100" Height="30" Margin="20 0" Click="UploadCloud" ToolTip="上传到云">
                                 <materialDesign:PackIcon Kind="Upload" />
                             </Button>
                         </StackPanel>
@@ -89,17 +92,13 @@
                 </TabItem>
                 <TabItem>
                     <TabItem.Header>
-                        <StackPanel
-          Width="auto"
-          Height="auto">
+                        <StackPanel Width="auto" Height="auto">
                             <materialDesign:PackIcon
-            Width="24"
-            Height="24"
-            HorizontalAlignment="Center"
-            Kind="MicrosoftWindows" />
-                            <TextBlock
-            HorizontalAlignment="Center"
-            Text="开机启动" />
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                Kind="MicrosoftWindows" />
+                            <TextBlock HorizontalAlignment="Center" Text="开机启动" />
                         </StackPanel>
                     </TabItem.Header>
                     <materialDesign:Card Margin="20">
@@ -115,24 +114,40 @@
                 </TabItem>
                 <TabItem>
                     <TabItem.Header>
-                        <StackPanel
-          Width="auto"
-          Height="auto">
+                        <StackPanel Width="auto" Height="auto">
                             <materialDesign:PackIcon
-            Width="24"
-            Height="24"
-            HorizontalAlignment="Center"
-            Kind="About" />
-                            <TextBlock
-            HorizontalAlignment="Center"
-            Text="关于" />
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                Kind="About" />
+                            <TextBlock HorizontalAlignment="Center" Text="关于" />
                         </StackPanel>
                     </TabItem.Header>
                     <materialDesign:Card Margin="20">
                         <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                             <materialDesign:PackIcon Kind="ToothbrushPaste" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="100" Margin="10"/>
 
-                            <TextBlock FontSize="14" FontFamily="微软雅黑" Margin="10 20 0 0">
+                                <StackPanel Orientation="Horizontal"  Margin="10 20 0 0">
+                                    <TextBlock FontSize="14" FontFamily="微软雅黑" VerticalAlignment="Center">
+                                     <Run Text="⚪ 版本信息   "/>
+                                     <Run x:Name="version"/>
+                                    </TextBlock>
+                                    <materialDesign:Badged x:Name="check" BadgeColorZoneMode="SecondaryMid" VerticalAlignment="Center" Margin="10 0">
+                                        <Button x:Name="checkUpdateBtn" Content="检查更新" Click="CheckUpdate" Style="{StaticResource MaterialDesignOutlinedDarkButton}"/>
+                                    </materialDesign:Badged>
+                                    <Button x:Name="newVersion" Visibility="Collapsed"
+                                          Style="{StaticResource MaterialDesignFlatLightButton}"
+                                          materialDesign:ButtonProgressAssist.Value="-1"
+                                          materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding DownloadLoading, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                                          Click="newVersionClick"
+                                          ToolTip="MaterialDesignFlatLightButton"
+                                          Content="有新版本点击下载"
+                                          Width="auto"
+                                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+                                </StackPanel>
+
+                                <TextBlock FontSize="14" FontFamily="微软雅黑" Margin="10 20 0 0">
                                      <Run Text="⚪ 软件所有权归3egirlsdream@github所有"/>
                                      <LineBreak />
                                      <Run Text="⚪ 最新版软件请自行到"/>
@@ -149,17 +164,13 @@
                 </TabItem>
                 <TabItem GotFocus="Exit">
                     <TabItem.Header>
-                        <StackPanel
-          Width="auto"
-          Height="auto">
+                        <StackPanel Width="auto" Height="auto">
                             <materialDesign:PackIcon
-            Width="24"
-            Height="24"
-            HorizontalAlignment="Center"
-            Kind="ExitToApp" />
-                            <TextBlock
-            HorizontalAlignment="Center"
-            Text="退出" />
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                Kind="ExitToApp" />
+                            <TextBlock HorizontalAlignment="Center" Text="退出" />
                         </StackPanel>
                     </TabItem.Header>
                 </TabItem>

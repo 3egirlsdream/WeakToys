@@ -14,6 +14,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MaterialDesignThemes.Wpf;
+using System.Net;
+using Microsoft.Win32;
 
 namespace WeakToys
 {
@@ -85,6 +88,60 @@ namespace WeakToys
         {
             vm.Text = Global.Key();
         }
+
+        private string newPath;
+        private async void CheckUpdate(object sender, RoutedEventArgs e)
+        {
+            checkUpdateBtn.IsEnabled = false;
+            var version = await Connections.HttpGetAsync<CLIENT_VERSION>(Global.Http + "/api/CloudSync/GetVersion?Client=WeakToys", Encoding.Default);
+            if(version != null && version.success && version.data != null)
+            {
+                newPath = version.data.PATH;
+                var v1 = new Version(this.version.Text);
+                var v2 = new Version(version.data.VERSION);
+                if(v2 > v1)
+                {
+                    check.Badge = new PackIcon() { Kind = PackIconKind.Update };
+                    newVersion.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    check.Badge = "";
+                    newVersion.Visibility = Visibility.Collapsed;
+                }
+            }
+            else
+            {
+                check.Badge = "";
+                newVersion.Visibility = Visibility.Collapsed;
+            }
+            checkUpdateBtn.IsEnabled = true;
+        }
+
+        private async void newVersionClick(object sender, RoutedEventArgs e)
+        {
+            using (var wc = new WebClient())
+            {
+                var fileName = newPath.Substring(newPath.LastIndexOf('/') + 1);
+                SaveFileDialog pSaveFileDialog = new SaveFileDialog
+                {
+                    Title = "保存为:",
+                    FileName = fileName,
+                    RestoreDirectory = true,
+                    Filter = "所有文件(*.*)|*.*"
+                };//同打开文件，也可指定任意类型的文件
+                if (pSaveFileDialog.ShowDialog() == true)
+                {
+                    string path = pSaveFileDialog.FileName;
+                    vm.DownloadLoading = true;
+                    newVersion.IsEnabled = false;
+                    await wc.DownloadFileTaskAsync(new Uri(newPath), path);
+                    vm.DownloadLoading = false;
+                    newVersion.IsEnabled = true;
+                }
+                
+            }
+        }
     }
 
 
@@ -96,6 +153,7 @@ namespace WeakToys
             setting = _setting;
             Text = Global.Key();
             InitCloud();
+            setting.version.Text = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
 
 
@@ -121,8 +179,32 @@ namespace WeakToys
             }
         }
 
+        private bool loading = false;
+        public bool Loading
+        {
+            get => loading;
+            set
+            {
+                loading = value;
+                NotifyPropertyChanged(nameof(Loading));
+            }
+        }
+
+
+        private bool downloadLoading = false;
+        public bool DownloadLoading
+        {
+            get => downloadLoading;
+            set
+            {
+                downloadLoading = value;
+                NotifyPropertyChanged(nameof(DownloadLoading));
+            }
+        }
+
         public async void InitCloud()
         {
+            Loading = true;
             var url = Global.Http + "/api/CloudSync/GetAll?user=" + Text;
             var rst = await Connections.HttpGetAsync<List<CloudSync>>(url, Encoding.Default);
             if (rst.success)
@@ -137,6 +219,7 @@ namespace WeakToys
                     }
                 }
             }
+            Loading = false;
         }
 
         public async void Download(string Id)
@@ -230,6 +313,15 @@ namespace WeakToys
                 NotifyPropertyChanged(nameof(Loading));
             }
         }
+    }
+
+    public class CLIENT_VERSION
+    {
+        public string ID { get; set; }
+        public DateTime DATETIME { get; set; }
+        public string CLIENT { get; set; }
+        public string VERSION { get; set; }
+        public string PATH { get; set; }
     }
 
 }
