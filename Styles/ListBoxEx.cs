@@ -67,7 +67,6 @@ namespace WeakToys.Styles
         {
             try
             {
-                HotKeyHelper.IsIgnorance = true;
                 if (!string.IsNullOrEmpty(textbox.Text))
                 {
                     Clipboard.SetText(textbox.Text);

@@ -50,7 +50,7 @@ namespace WeakToys
             Global.Containers = Global.GetTextInfo();
         }
 
-        private async void OnIncrementOrDecrement(object sender, HotkeyEventArgs e)
+        private void OnIncrementOrDecrement(object sender, HotkeyEventArgs e)
         {
             this.Visibility = Visibility.Visible;
             this.Focus();

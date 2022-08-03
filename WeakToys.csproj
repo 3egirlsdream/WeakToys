@@ -10,12 +10,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Class\HotKeyHelper.cs" />
+    <Compile Remove="Class\HotKeyManager.cs" />
+    <Compile Remove="Class\HotKeyModel.cs" />
+    <Compile Remove="Class\HotKeySettingManager.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove=".gitattributes" />
     <None Remove=".gitignore" />
     <None Remove="clipboard.ico" />
     <None Remove="clipboard.png" />
-    <None Remove="menu.ico" />
-    <None Remove="menu.png" />
     <None Remove="README.md" />
   </ItemGroup>
 
@@ -43,8 +48,6 @@
 
   <ItemGroup>
     <Resource Include="clipboard.ico" />
-    <Resource Include="menu.ico" />
-    <Resource Include="menu.png" />
   </ItemGroup>
 
   <ItemGroup>
