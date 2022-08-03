@@ -19,7 +19,7 @@
             </Setter>
             <Setter Property="Effect">
                 <Setter.Value>
-                    <DropShadowEffect Color="#000000" ShadowDepth="1" BlurRadius="10" Opacity="0.4" />
+                    <DropShadowEffect Color="#000000" ShadowDepth="1" BlurRadius="10" Opacity="0.2" />
                 </Setter.Value>
             </Setter>
         </Style>
@@ -44,7 +44,7 @@
                 </Button>
             </Border>
 
-            <Border CornerRadius="5" BorderThickness="0" Margin="10" Grid.Row="1">
+            <Border CornerRadius="5" BorderThickness="0" Margin="10" Grid.Row="1" Cursor="Arrow">
                 <Border.Background>
                     <SolidColorBrush Color="#FFF" Opacity="1"/>
                 </Border.Background>

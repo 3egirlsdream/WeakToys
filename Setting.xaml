@@ -10,6 +10,21 @@
         AllowsTransparency="True"
         WindowStyle="None"
         Title="Setting" Height="450" Width="700">
+    <Window.Resources>
+        <Style TargetType="Border" x:Key="BorderStyle">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <SolidColorBrush Color="#FFF" Opacity="1"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="#000000" ShadowDepth="1" BlurRadius="10" Opacity="0.2" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="CornerRadius" Value="5"></Setter>
+        </Style>
+    </Window.Resources>
     <Window.Background>
         <SolidColorBrush Opacity="0.5" Color="Transparent"/>
     </Window.Background>
@@ -48,7 +63,7 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="100"/>
                         </Grid.RowDefinitions>
-                        <materialDesign:Card Margin="20 20">
+                        <Border Style="{StaticResource BorderStyle}" Margin="20 20">
                             <StackPanel Orientation="Horizontal" Margin="10 0">
                                 <TextBox Width="300" VerticalAlignment="Center" Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     <Button VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" Click="refreshKey" ToolTip="重置机器唯一识别码（会根据机器硬件自动生成，同一机器唯一）" Margin="10 0">
@@ -61,8 +76,8 @@
                                     <materialDesign:PackIcon Kind="CloudSync" />
                                 </Button>
                             </StackPanel>
-                        </materialDesign:Card>
-                        <materialDesign:Card Margin="20" Grid.Row="1">
+                        </Border>
+                        <Border Style="{StaticResource BorderStyle}" Margin="20" Grid.Row="1">
                             <ListBox ItemsSource="{Binding ItemsSource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
@@ -80,7 +95,7 @@
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
                             </ListBox>
-                        </materialDesign:Card>
+                        </Border>
 
                         <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
                                 <Button Width="100" Height="30" Margin="20 0" Click="UploadCloud" ToolTip="上传到云">
@@ -101,7 +116,7 @@
                             <TextBlock HorizontalAlignment="Center" Text="开机启动" />
                         </StackPanel>
                     </TabItem.Header>
-                    <materialDesign:Card Margin="20">
+                    <Border Style="{StaticResource BorderStyle}" Margin="20">
                         <TextBlock FontSize="14" FontFamily="微软雅黑" Margin="10">
                             <Run Text="1.复制软件的快捷方式"/>
                             <LineBreak />
@@ -109,7 +124,7 @@
                             <LineBreak />
                             <Run Text="3.粘贴快捷方式"/>
                         </TextBlock>
-                    </materialDesign:Card>
+                    </Border>
 
                 </TabItem>
                 <TabItem>
@@ -123,7 +138,7 @@
                             <TextBlock HorizontalAlignment="Center" Text="关于" />
                         </StackPanel>
                     </TabItem.Header>
-                    <materialDesign:Card Margin="20">
+                    <Border Style="{StaticResource BorderStyle}" Margin="20">
                         <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                             <materialDesign:PackIcon Kind="ToothbrushPaste" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="100" Margin="10"/>
 
@@ -133,7 +148,7 @@
                                      <Run x:Name="version"/>
                                     </TextBlock>
                                     <materialDesign:Badged x:Name="check" BadgeColorZoneMode="SecondaryMid" VerticalAlignment="Center" Margin="10 0">
-                                        <Button x:Name="checkUpdateBtn" Content="检查更新" Click="CheckUpdate" Style="{StaticResource MaterialDesignOutlinedDarkButton}"/>
+                                        <Button x:Name="checkUpdateBtn" Content="检查更新" Click="CheckUpdate" Style="{StaticResource MaterialDesignOutlinedDarkButton}" Cursor="Hand"/>
                                     </materialDesign:Badged>
                                     <Button x:Name="newVersion" Visibility="Collapsed"
                                           Style="{StaticResource MaterialDesignFlatLightButton}"
@@ -159,7 +174,7 @@
                                 <TextBlock Text="xulezuo@hotmail.com" TextDecorations="Underline"  FontSize="14" FontFamily="微软雅黑"/>
                             </StackPanel>
                         </StackPanel>
-                    </materialDesign:Card>
+                    </Border>
 
                 </TabItem>
                 <TabItem GotFocus="Exit">
