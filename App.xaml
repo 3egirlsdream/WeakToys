@@ -16,6 +16,7 @@
             </ResourceDictionary.MergedDictionaries>
             <ContextMenu x:Shared="false" x:Key="SysTrayMenu">
                 <MenuItem Header="显示窗口" Command="{Binding ShowWindowCommand}" />
+                <MenuItem Header="执行脚本" Command="{Binding ExcuteCmdCommand}" />
                 <MenuItem Header="关闭窗口" Command="{Binding HideWindowCommand}" />
 
                 <Separator />

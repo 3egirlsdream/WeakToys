@@ -49,6 +49,19 @@ namespace WeakToys
             }
         }
 
+        public static string GetBatText()
+        {
+            var filePath = LocalPath + "\\bat.txt";
+
+            using (var fs = new FileStream(filePath, FileMode.Open))
+            {
+                var sr = new StreamReader(fs, Encoding.Default);
+                var content = sr.ReadToEnd();
+                sr.Close();
+                return content;
+            }
+        }
+
         public static string Http { get; set; } = "http://thankful.top:4396";
 
 

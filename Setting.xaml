@@ -159,7 +159,7 @@
                                           ToolTip="MaterialDesignFlatLightButton"
                                           Content="有新版本点击下载"
                                           Width="auto"
-                                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+                                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Cursor="Hand" />
                                 </StackPanel>
 
                                 <TextBlock FontSize="14" FontFamily="微软雅黑" Margin="10 20 0 0">

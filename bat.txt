@@ -1,0 +1,4 @@
+D:\webwps\dist;
+D:\img\b\dist;
+cd /d D:\\webwps;
+npm run build;
