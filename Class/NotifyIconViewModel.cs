@@ -88,9 +88,9 @@ namespace WeakToys.Class
 
         public SimpleCommand ExcuteCmdCommand => new SimpleCommand()
         {
-            ExecuteDelegate = async o =>
+            ExecuteDelegate = o =>
             {
-                var rs = await Task.Run(() =>
+                Action<NotifyBox> rs = new Action<NotifyBox>((notifyBox)=>
                 {
                     var txt = Global.GetBatText();
                     var ls = txt.Split(new string[] { ";", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
@@ -99,9 +99,14 @@ namespace WeakToys.Class
                     var from = ls[0];
                     var folder = new DirectoryInfo(from);
                     CopyFile(folder, ls[1]);
-                    return result;
+                    notifyBox.Dispatcher.Invoke(() =>
+                    {
+                        notifyBox.txt.Content = "执行完成";
+                    });
+                    MessageBox.Show(result);
                 });
-                MessageBox.Show(rs);
+                NotifyBox notifyBox = new NotifyBox(rs);
+                notifyBox.ShowDialog();
                 
             },
             CanExecuteDelegate = x => true
